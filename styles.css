@@ -1,0 +1,74 @@
+body {
+  background-color: grey;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+table {
+  width: 96%;
+}
+
+th {
+  min-width: 5%;
+}
+
+td {
+  min-width: 16%;
+}
+
+button {
+  border-radius: 4px;
+}
+
+div.tile {
+  border-bottom: 1px solid darkgrey;
+  text-align: center;
+  min-height: 26px;
+  padding-top: 6px;
+}
+
+td div:first-child {
+  overflow: hidden;
+  clip-path: polygon(
+    0 25%,
+    8% 25%,
+    8% 0,
+    92% 0%,
+    92% 25%,
+    100% 25%,
+    100% 100%,
+    0% 100%
+  )
+}
+
+div.dragon {
+  background-color: white;
+  color: transparent;
+  text-shadow: 0 0 0 red;
+}
+
+div.fire {
+  background-color: #aa4203;
+  color: white;
+}
+
+div.earth {
+  background-color: #795d4c;
+  color: white;
+}
+
+div.void {
+  background-color: #533455;
+  color: white;
+}
+
+div.wind {
+  background-color: #c9d9d2;
+  color: #00a693;
+}
+
+div.water {
+  background-color: #00a693;
+  color: #c9d9d2;
+}
