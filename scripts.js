@@ -57,8 +57,8 @@ class Gorinto
       this.addTileToBag(VOID);
       this.addTileToBag(WIND);
       this.addTileToBag(EARTH);
+      this.addTileToBag(FIRE);
       this.addTileToBag(WATER);
-      this.addTileToBag(DRAGON);
     }
     this.fiveP = true;
   }
