@@ -14,6 +14,14 @@ const TILE_CLASSES = {
   [DRAGON]: 'dragon',
 }
 
+const PEAK = [
+  [ 2, 2, 2, 2, 2 ],
+  [ 2, 3, 3, 3, 2 ],
+  [ 2, 3, 4, 3, 2 ],
+  [ 2, 3, 3, 3, 2 ],
+  [ 2, 2, 2, 2, 2 ],
+];
+
 class Gorinto
 {
   constructor() {
@@ -94,13 +102,19 @@ class Gorinto
       return `<div class="tile ${TILE_CLASSES[t]}">${t}</div>`
     }
 
-    const cells = document.querySelectorAll('td');
-    cells.forEach((e) => {
-      let stack = new Array(parseInt(e.getAttribute('data-mountain')) + extraMountainTilesPerStack);
-      stack.fill('x');
-      stack = stack.map(_ => g.draw());
-      e.innerHTML = stack.map(renderTile).join("\n");
-    });
+    let rows = document.querySelectorAll('tr[data-row]');
+    rows.forEach((r) => {
+      let rIndex = parseInt(r.dataset.row, 10) - 1;
+      let cols = r.querySelectorAll('td');
+      cols.forEach((c) => {
+        let cIndex = parseInt(c.dataset.col, 10) - 1;
+        let tileCount = PEAK[rIndex][cIndex] + extraMountainTilesPerStack;
+        let stack = new Array(tileCount);
+        stack.fill('x');
+        stack = stack.map(_ => g.draw());
+        c.innerHTML = stack.map(renderTile).join("\n");
+      });
+    })
 
     return g;
   }
