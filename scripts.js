@@ -24,43 +24,28 @@ const PEAK = [
 
 class Gorinto
 {
-  constructor() {
-    this.bag = this.fillBag();
-    this.fiveP = false;
-  }
-
-  fillBag() {
+  constructor(fifthPlayer, dragons) {
     const allTiles = new Array(100);
     allTiles.fill(VOID, 0, 20);
     allTiles.fill(WIND, 20, 40);
     allTiles.fill(EARTH, 40, 60);
     allTiles.fill(FIRE, 60, 80);
     allTiles.fill(WATER, 80, 100);
+    if (fifthPlayer) {
+      for (let i = 0; i < 5; ++i) {
+        allTiles.push(VOID, WIND, EARTH, FIRE, WATER);
+      }
+    }
+    if (dragons) {
+      allTiles.push(DRAGON, DRAGON, DRAGON, DRAGON, DRAGON);
+    }
 
-    return this.shuffle(allTiles)
+    this.bag = this.shuffle(allTiles);
   }
 
   addTileToBag(tile) {
     const insertionPos = Math.floor(Math.random() * this.bag.length);
     this.bag.splice(insertionPos, 0, tile);
-  }
-
-  enableDragonExpansion() {
-    for (let i = 0; i < 5; ++i) {
-      const insertionPos = Math.floor(Math.random() * this.bag.length);
-      this.bag.splice(insertionPos, 0, DRAGON);
-    }
-  }
-
-  enableFivePlayerMode() {
-    for (let i = 0; i < 5; ++i) {
-      this.addTileToBag(VOID);
-      this.addTileToBag(WIND);
-      this.addTileToBag(EARTH);
-      this.addTileToBag(FIRE);
-      this.addTileToBag(WATER);
-    }
-    this.fiveP = true;
   }
 
   shuffle(tiles) {
@@ -86,17 +71,10 @@ class Gorinto
   }
 
   static populateBoard() {
-    const g = new Gorinto();
-    let extraMountainTilesPerStack = 0;
+    let dragonExpansion = document.querySelector('#dragon-chk');
+    let fifthPlayerExpansion = document.querySelector('#fivep-chk');
 
-    if (document.querySelector('#dragon-chk').checked) {
-      g.enableDragonExpansion();
-    }
-
-    if (document.querySelector('#fivep-chk').checked) {
-      g.enableFivePlayerMode();
-      extraMountainTilesPerStack = 1;
-    }
+    const g = new Gorinto(fifthPlayerExpansion.checked, dragonExpansion.checked);
 
     const renderTile = (t) => {
       return `<div class="tile ${TILE_CLASSES[t]}">${t}</div>`
@@ -108,7 +86,10 @@ class Gorinto
       let cols = r.querySelectorAll('td');
       cols.forEach((c) => {
         let cIndex = parseInt(c.dataset.col, 10) - 1;
-        let tileCount = PEAK[rIndex][cIndex] + extraMountainTilesPerStack;
+        let tileCount = PEAK[rIndex][cIndex];
+        if (fifthPlayerExpansion.checked) {
+          tileCount = tileCount + 1;
+        }
         let stack = new Array(tileCount);
         stack.fill('x');
         stack = stack.map(_ => g.draw());
