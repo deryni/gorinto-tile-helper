@@ -75,11 +75,6 @@ class Gorinto
     this.landscape = Array.from(LANDSCAPES[landscape]);
   }
 
-  addTileToBag(tile) {
-    const insertionPos = Math.floor(Math.random() * this.bag.length);
-    this.bag.splice(insertionPos, 0, tile);
-  }
-
   shuffle(tiles) {
     let currentIndex = tiles.length;
 
