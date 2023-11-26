@@ -1,10 +1,18 @@
-
 const VOID = 'xx &#x7a7a xx';
 const WIND = '-- &#x6c34 --';
 const EARTH = '.. &#x5730 ..';
 const FIRE = '^^ &#x706b ^^';
 const WATER = '~~ &#x98a8 ~~';
 const DRAGON = '~&gt; &#x1f409; &lt;~';
+
+const TILE_CLASSES = {
+  [VOID]: 'void',
+  [WIND]: 'wind',
+  [EARTH]: 'earth',
+  [FIRE]: 'fire',
+  [WATER]: 'water',
+  [DRAGON]: 'dragon',
+}
 
 class Gorinto
 {
@@ -83,13 +91,7 @@ class Gorinto
     }
 
     const renderTile = (t) => {
-      const tiles = [VOID, WIND, EARTH, FIRE, WATER, DRAGON];
-      const classes = ['void', 'wind', 'earth', 'fire', 'water', 'dragon'];
-
-      const tileClasses = {};
-      tiles.forEach((t, i) => { tileClasses[t] = classes[i]; });
-
-      return `<div class="tile ${tileClasses[t]}">${t}<br/></div>`
+      return `<div class="tile ${TILE_CLASSES[t]}">${t}</div>`
     }
 
     const cells = document.querySelectorAll('td');
