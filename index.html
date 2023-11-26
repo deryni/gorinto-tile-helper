@@ -61,12 +61,24 @@
         </table>
 
         <form>
+            <label for="board-landscape">Board Landscape</label>
+            <select id="board-landscape">
+                <option>Peak</option>
+                <option>Waves</option>
+                <option>Mesa</option>
+                <option>Lake</option>
+                <option>Hill</option>
+            </select>
+
+            <br/>
             <label for="dragon-chk">Include dragon expansion:</label>
             <input type="checkbox" id="dragon-chk" name="dragons">
 
+            <br/>
             <label for="fivep-chk">Add fifth player tiles:</label>
             <input type="checkbox" id="fivep-chk" name="fivep">
 
+            <br/>
             <button type="button" onClick="Gorinto.populateBoard()">Populate board</button>
         </form>
     </body>

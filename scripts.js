@@ -14,17 +14,48 @@ const TILE_CLASSES = {
   [DRAGON]: 'dragon',
 }
 
-const PEAK = [
-  [ 2, 2, 2, 2, 2 ],
-  [ 2, 3, 3, 3, 2 ],
-  [ 2, 3, 4, 3, 2 ],
-  [ 2, 3, 3, 3, 2 ],
-  [ 2, 2, 2, 2, 2 ],
-];
+const LANDSCAPES = {
+  peak: [
+    [ 2, 2, 2, 2, 2 ],
+    [ 2, 3, 3, 3, 2 ],
+    [ 2, 3, 4, 3, 2 ],
+    [ 2, 3, 3, 3, 2 ],
+    [ 2, 2, 2, 2, 2 ],
+  ],
+  waves: [
+    [ 2, 3, 2, 3, 2 ],
+    [ 2, 3, 2, 3, 2 ],
+    [ 2, 3, 2, 3, 2 ],
+    [ 2, 3, 2, 3, 2 ],
+    [ 2, 3, 2, 3, 2 ],
+  ],
+  mesa: [
+    [ 1, 2, 1, 2, 1 ],
+    [ 2, 4, 4, 4, 2 ],
+    [ 1, 4, 4, 4, 1 ],
+    [ 2, 4, 4, 4, 2 ],
+    [ 1, 2, 1, 2, 1 ],
+  ],
+  lake: [
+    [ 3, 3, 3, 3, 3 ],
+    [ 3, 2, 1, 2, 3 ],
+    [ 3, 1, 0, 1, 3 ],
+    [ 3, 2, 1, 2, 3 ],
+    [ 3, 3, 3, 3, 3 ],
+  ],
+  hill: [
+    [ 1, 3, 4, 3, 1 ],
+    [ 1, 3, 4, 3, 1 ],
+    [ 1, 3, 4, 3, 1 ],
+    [ 1, 3, 4, 3, 1 ],
+    [ 1, 3, 4, 3, 1 ],
+  ],
+};
+
 
 class Gorinto
 {
-  constructor(fifthPlayer, dragons) {
+  constructor(landscape, fifthPlayer, dragons) {
     const allTiles = new Array(100);
     allTiles.fill(VOID, 0, 20);
     allTiles.fill(WIND, 20, 40);
@@ -41,6 +72,7 @@ class Gorinto
     }
 
     this.bag = this.shuffle(allTiles);
+    this.landscape = Array.from(LANDSCAPES[landscape]);
   }
 
   addTileToBag(tile) {
@@ -71,10 +103,14 @@ class Gorinto
   }
 
   static populateBoard() {
+    let landscape = document.querySelector('#board-landscape');
+    let landscapeValue = landscape.options[landscape.selectedIndex].value;
     let dragonExpansion = document.querySelector('#dragon-chk');
     let fifthPlayerExpansion = document.querySelector('#fivep-chk');
 
-    const g = new Gorinto(fifthPlayerExpansion.checked, dragonExpansion.checked);
+    const g = new Gorinto(landscapeValue.toLowerCase(),
+                          fifthPlayerExpansion.checked,
+                          dragonExpansion.checked);
 
     const renderTile = (t) => {
       return `<div class="tile ${TILE_CLASSES[t]}">${t}</div>`
@@ -86,7 +122,7 @@ class Gorinto
       let cols = r.querySelectorAll('td');
       cols.forEach((c) => {
         let cIndex = parseInt(c.dataset.col, 10) - 1;
-        let tileCount = PEAK[rIndex][cIndex];
+        let tileCount = g.landscape[rIndex][cIndex];
         if (fifthPlayerExpansion.checked) {
           tileCount = tileCount + 1;
         }
