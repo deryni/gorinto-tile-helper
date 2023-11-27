@@ -131,3 +131,5 @@ class Gorinto
     return g;
   }
 }
+
+document.querySelector('#populate-board').addEventListener('click', Gorinto.populateBoard);
