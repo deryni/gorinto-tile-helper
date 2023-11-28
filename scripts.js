@@ -132,4 +132,32 @@ class Gorinto
   }
 }
 
-document.querySelector('#populate-board').addEventListener('click', Gorinto.populateBoard);
+let popButton = document.querySelector('#populate-board');
+popButton.addEventListener('click', Gorinto.populateBoard);
+
+let sparams = new URLSearchParams(document.location.search);
+let lscape = sparams.get('landscape');
+
+if (lscape) {
+  let lselector = document.querySelector('#board-landscape');
+  lselector.value = lscape;
+  if (lselector.selectedIndex === -1) {
+    lselector.selectedIndex = 0;
+  }
+}
+
+let dragon = sparams.get('dragon');
+if (dragon) {
+  let dragonExpansion = document.querySelector('#dragon-chk');
+  dragonExpansion.checked = true;
+}
+
+let fifthp = sparams.get('fifthp');
+if (fifthp) {
+  let fifthPlayerExpansion = document.querySelector('#fivep-chk');
+  fifthPlayerExpansion.checked = true;
+}
+
+if (lscape || dragon || fifthp) {
+  popButton.click();
+}
