@@ -1,6 +1,8 @@
 const VERSION = 'v1';
 
-const CACHE_NAME = `gorinto-tile-helper-${VERSION}`;
+const CACHE_PREFIX = 'gorinto-tile-helper-'
+
+const CACHE_NAME = `${CACHE_PREFIX}${VERSION}`;
 
 const APP_STATIC_RESOURCES = [
   '/gorinto-tile-helper/',
@@ -26,7 +28,7 @@ self.addEventListener('activate', (event) => {
       const names = await caches.keys();
       await Promise.all(
         names.map((name) => {
-          if (name !== CACHE_NAME) {
+          if ((name !== CACHE_NAME) && (name.startsWith(CACHE_PREFIX))) {
             return caches.delete(name);
           }
         }),
