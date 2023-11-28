@@ -12,6 +12,10 @@
   ],
   "shortcuts": [
     {
+      "name": "Peak",
+      "url": "/gorinto-tile-helper/?landscape=Peak"
+    },
+    {
       "name": "Waves",
       "url": "/gorinto-tile-helper/?landscape=Waves"
     },
