@@ -4,7 +4,13 @@
     <head>
         <link rel="icon" href="./images/GorintoBoxCover-small.webp">
         <link rel="stylesheet" href="./styles.css">
+        <link rel="manifest" href="./manifest.json">
         <script src="./scripts.js" defer></script>
+        <script>
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js");
+          }
+        </script>
 
         <title>Gorinto Tiler</title>
     </head>

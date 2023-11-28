@@ -1,0 +1,13 @@
+{
+  "name": "Gorinto Landscape Helper",
+  "short_name": "Gorinto Helper",
+  "start_url": "/gorinto-tile-helper/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "/gorinto-tile-helper/images/GorintoBoxCover-small.webp",
+      "sizes": "246x246"
+    }
+  ]
+}
