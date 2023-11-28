@@ -9,5 +9,23 @@
       "src": "/gorinto-tile-helper/images/GorintoBoxCover-small.webp",
       "sizes": "246x246"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Waves",
+      "url": "/gorinto-tile-helper/?landscape=Waves"
+    },
+    {
+      "name": "Mesa",
+      "url": "/gorinto-tile-helper/?landscape=Mesa"
+    },
+    {
+      "name": "Lake",
+      "url": "/gorinto-tile-helper/?landscape=Lake"
+    },
+    {
+      "name": "Hill",
+      "url": "/gorinto-tile-helper/?landscape=Hill"
+    }
   ]
 }
